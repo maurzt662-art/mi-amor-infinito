@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ingrid 💖</title>
+
+<style>
+body{
+  margin:0;
+  padding:0;
+  background:linear-gradient(to top,#b3e5ff,#e6f7ff);
+  font-family:Arial, sans-serif;
+  text-align:center;
+  overflow:hidden;
+  transition:0.5s;
+}
+
+.night{
+  background:linear-gradient(to top,#001f3f,#003366);
+  color:white;
+}
+
+h1{
+  margin-top:20px;
+  color:#ff4d6d;
+}
+
+#counter{
+  font-size:18px;
+  margin-bottom:10px;
+}
+
+/* 💓 Contenedor */
+#teamo{
+  margin-top:40px;
+  font-size:80px;
+  font-weight:bold;
+  color:#ff4d6d;
+  display:flex;
+  justify-content:center;
+  gap:20px;
+}
+
+/* 💓 Cada letra */
+.letra{
+  position:relative;
+  animation: latido 1s infinite;
+  display:inline-block;
+}
+
+@keyframes latido{
+  0%   { transform:scale(1); }
+  25%  { transform:scale(1.15); }
+  40%  { transform:scale(1); }
+  60%  { transform:scale(1.15); }
+  100% { transform:scale(1); }
+}
+
+/* 💕 Mini corazones */
+.miniHeart{
+  position:absolute;
+  color:#ff4d6d;
+  font-size:18px;
+  pointer-events:none;
+  animation: subir 1s forwards;
+}
+
+@keyframes subir{
+  0%{ transform:translateY(0) scale(1); opacity:1; }
+  100%{ transform:translateY(-80px) scale(1.5); opacity:0; }
+}
+
+button{
+  margin:5px;
+  padding:10px 18px;
+  border:none;
+  border-radius:20px;
+  cursor:pointer;
+  background:#ff4d6d;
+  color:white;
+  font-size:14px;
+}
+
+#proposal{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.85);
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  font-size:25px;
+  display:none;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Ingrid 💖 Mi amor por ti crece cada segundo</h1>
+<div id="counter"></div>
+
+<div id="teamo">
+  <span class="letra">T</span>
+  <span class="letra">E</span>
+  <span class="letra">A</span>
+  <span class="letra">M</span>
+  <span class="letra">O</span>
+</div>
+
+<div>
+<button onclick="mensaje()">Mensaje 💌</button>
+<button onclick="modoNoche()">Modo Noche 🌙</button>
+<button onclick="window.open('https://youtu.be/2xYtdMo80mA?si=m7a2yQa5ccN7nqrH')">
+Eres mi gema 💎
+</button>
+<button onclick="propuesta()">??? 💍</button>
+</div>
+
+<div id="proposal">
+  <p>Ingrid 💖</p>
+  <p>¿Quieres seguir creciendo conmigo toda la vida? 💍</p>
+  <button onclick="cerrarPropuesta()">Sí 💖</button>
+</div>
+
+<script>
+
+// ⏳ Contador
+let startDate = new Date("2023-11-21T00:00:00");
+
+function updateCounter(){
+  let now = new Date();
+  let diff = now - startDate;
+
+  let days = Math.floor(diff / (1000*60*60*24));
+  let hours = Math.floor((diff/(1000*60*60))%24);
+  let minutes = Math.floor((diff/(1000*60))%60);
+  let seconds = Math.floor((diff/1000)%60);
+
+  document.getElementById("counter").innerHTML =
+  days+" días "+hours+" horas "+minutes+" min "+seconds+" seg 💕";
+}
+setInterval(updateCounter,1000);
+
+// 💓 Cada letra suelta corazones
+let letras = document.querySelectorAll(".letra");
+
+function soltarDesdeLetra(letra){
+  for(let i=0;i<4;i++){
+    let heart = document.createElement("div");
+    heart.classList.add("miniHeart");
+    heart.innerHTML="💖";
+    heart.style.left = (Math.random()*40 - 20) + "px";
+    heart.style.top = "0px";
+    letra.appendChild(heart);
+    setTimeout(()=>heart.remove(),1000);
+  }
+}
+
+setInterval(()=>{
+  letras.forEach(letra=>{
+    soltarDesdeLetra(letra);
+  });
+},1000);
+
+// 💌 Mensaje
+function mensaje(){
+  alert("Desde el 21 de noviembre de 2023 mi vida es más bonita contigo 💖");
+}
+
+// 🌙 Modo noche
+function modoNoche(){
+  document.body.classList.toggle("night");
+}
+
+// 💍 Propuesta
+function propuesta(){
+  document.getElementById("proposal").style.display="flex";
+}
+
+function cerrarPropuesta(){
+  alert("Sabía que dirías que sí 💖");
+  document.getElementById("proposal").style.display="none";
+}
+
+</script>
+
+</body>
+</html>
